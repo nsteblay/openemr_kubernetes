@@ -1,4 +1,4 @@
-# openemr kubernetes files
+# OpenEMR Kubernetes Files
 
 Download the four files: mysql-pv.yaml, mysql-deployment.yaml, openemr-pv.yaml, openemr-deployment.yaml.  
 
