@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: openemr-log-storage
+  labels:
+    type: local
+spec:
+  storageClassName: openemrloglocalstorage
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+#
+# Provide path to your local host path
+# Create a sub-directory apache2 in the host path to hold the logs
+# This example works with Windows Fast Ring WSL2 and Docker Desktop Edge Release 2/9/2020
+#
+  hostPath:
+    path: "/run/desktop/mnt/host/c/users/nsteb/data/openemr/log"
+    # path: "/run/desktop/mnt/host/c/users/userid/data/openemr/log"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: openemr-log-persistent-volume-claim
+spec:
+  storageClassName: openemrloglocalstorage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: openemr-site-storage
+spec:
+  storageClassName: openemrsitelocalstorage
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+#
+# Provide path to your local host path
+# Create a sub-directory default in the host path to hold the PHP app files
+# Need to copy site content from github https://github.com/openemr/openemr/tree/master/sites/default into the default sub-directory
+# This example works with Windows Fast Ring WSL2 and Docker Desktop Edge release 2/9/2020
+#
+  hostPath:
+    path: "/run/desktop/mnt/host/c/users/nsteb/openEMR/openemr/sites"
+    # path: "/run/desktop/mnt/host/c/users/userid/openEMR/openemr/sites"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: openemr-site-persistent-volume-claim
+spec:
+  storageClassName: openemrsitelocalstorage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

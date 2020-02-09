@@ -1,0 +1,72 @@
+apiVersion: v1 
+kind: Service
+metadata:
+  name: openemr-http
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 30080
+  selector:
+    app: openemr
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: openemr-https
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 443
+      port: 443
+      nodePort: 30443
+  selector:
+    app: openemr
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: openemr
+  labels:
+    app: openemr
+spec:
+  selector:
+    matchLabels:
+      app: openemr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: openemr
+      labels:
+        app: openemr
+    spec:
+      containers:
+      - image: openemr/openemr:5.0.2
+        name: openemr
+        env:
+          - name: MYSQL_HOST
+            value: mysql
+          - name: MYSQL_ROOT_PASS
+            value: root
+          - name: MYSQL_USER
+            value: openemr
+          - name: MYSQL_PASS
+            value: openemr
+          - name: OE_USER
+            value: admin
+          - name: OE_PASS
+            value: pass
+        volumeMounts:
+          - name: openemr-log-persistent-storage
+            mountPath: /var/log
+          - name: openemr-site-persistent-storage
+            mountPath: /var/www/localhost/htdocs/openemr/sites
+      volumes:
+        - name: openemr-log-persistent-storage
+          persistentVolumeClaim:
+             claimName: openemr-log-persistent-volume-claim          
+        - name: openemr-site-persistent-storage
+          persistentVolumeClaim:
+             claimName: openemr-site-persistent-volume-claim          
