@@ -16,8 +16,7 @@ spec:
 # This example works with Windows Fast Ring WSL2 and Docker Desktop Edge Release 2/9/2020
 #
   hostPath:
-    path: "/run/desktop/mnt/host/c/users/nsteb/data/openemr/log"
-    # path: "/run/desktop/mnt/host/c/users/userid/data/openemr/log"
+    path: "/run/desktop/mnt/host/c/users/userid/data/openemr/log"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -48,8 +47,7 @@ spec:
 # This example works with Windows Fast Ring WSL2 and Docker Desktop Edge release 2/9/2020
 #
   hostPath:
-    path: "/run/desktop/mnt/host/c/users/nsteb/openEMR/openemr/sites"
-    # path: "/run/desktop/mnt/host/c/users/userid/openEMR/openemr/sites"
+    path: "/run/desktop/mnt/host/c/users/userid/openEMR/openemr/sites"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
