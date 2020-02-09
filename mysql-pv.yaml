@@ -15,7 +15,6 @@ spec:
 # This example works with Windows Fast Ring WSL2 and Docker Desktop Edge Release 2/9/2020
 #
   hostPath:
-    path: "/run/desktop/mnt/host/c/Users/nsteb/data/mysql"
     # path: "/run/desktop/mnt/host/c/Users/userid/data/mysql"
 ---
 apiVersion: v1
