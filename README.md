@@ -4,4 +4,4 @@ I created Kubernetes yaml files for running OpenEMR in a single local Kubernetes
 
 Download the four files: mysql-pv.yaml, mysql-deployment.yaml, openemr-pv.yaml, openemr-deployment.yaml.  
 
-Use kubectl apply -f <yaml file name> to create volumes, services and deployments.  Process them in the order listed above.
+Use kubectl apply -f (yaml file name) to create volumes, services and deployments.  Process them in the order listed above.
